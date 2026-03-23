@@ -457,7 +457,7 @@ async function aiLookupQA(){
   gv('qa-loading').classList.add('show');
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:300,
         system:'Return ONLY valid JSON, no markdown: {"emoji":"single emoji","calories":number,"protein":number,"carbs":number,"fat":number}',
         messages:[{role:'user',content:`Nutrition facts for: ${name}. Use official label if branded.`}]})});
     const data=await res.json();
@@ -652,7 +652,7 @@ After this meal, remaining for the day: ${remaining.cal} kcal, ${remaining.p}g P
 Give a 2-3 sentence honest assessment: how well this meal fits his cut goals, what it does well or poorly, and one actionable tip. Be direct, no fluff.`;
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:200,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:200,
         messages:[{role:'user',content:prompt}]})});
     const data=await res.json();
     const text=data.content.map(b=>b.text||'').join('').trim();
@@ -696,7 +696,7 @@ async function analyzeMeal(){
   content.push({type:'text',text:prompt});
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1500,
         system:`Precise nutrition expert. Identify each ingredient separately.
 Return ONLY valid JSON, no markdown:
 {"confidence":"high"|"medium"|"low","confidence_tip":"one sentence or empty","ingredients":[{"name":"name","emoji":"emoji","portion":"e.g. 80g","calories":number,"protein":number,"carbs":number,"fat":number,"fibre":number,"sugar":number,"sodium":number}]}
@@ -922,7 +922,7 @@ async function aiLookupIngredient(){
   gv('ing-lookup-loading').classList.add('show');
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:300,
         system:'Return ONLY valid JSON, no markdown: {"emoji":"emoji","portion":"portion description","calories":number,"protein":number,"carbs":number,"fat":number}',
         messages:[{role:'user',content:`Nutrition facts for: ${name}`}]})});
     const data=await res.json();
@@ -1087,7 +1087,7 @@ Direct. No fluff. Reference the rolling context if there are patterns worth call
 
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:900,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:900,
         system:'You are a direct, no-nonsense performance and nutrition coach for '+getProfile().name+'. Honest, specific, actionable. No filler. When you spot multi-day patterns (e.g. 3rd day under on protein), call them out explicitly.',
         messages:[{role:'user',content:prompt}]})});
     const data=await res.json();
@@ -1108,7 +1108,7 @@ Direct. No fluff. Reference the rolling context if there are patterns worth call
 async function generateCoachSuggestions(debriefText){
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:120,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:120,
         system:'You are a nutrition and performance coach.',
         messages:[{role:'user',content:`Based on this daily debrief, write 3 short questions that the athlete would ask their coach — things like "how can I fix my protein intake?", "what should I eat tonight?", "is my deficit too aggressive?". First-person from the athlete's perspective. Return ONLY 3 lines, one question per line, no numbering, under 10 words each.\n\n${debriefText}`}]})});
     const data=await res.json();
@@ -1153,7 +1153,7 @@ async function sendChatMessage(){
 
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:600,
         system:`You are a direct, no-nonsense performance and nutrition coach for ${getProfile().name}. You have full context of his day. Be specific, honest, and actionable. Keep replies concise.\n\n${getDayContext()}`,
         messages:chatHistory})});
     const data=await res.json();
@@ -1255,14 +1255,14 @@ function _wcFrame(canvas,bg,scene){
   if(tod==='morning'){
     // Sky gradient
     const sk=ctx.createLinearGradient(0,0,w,h);
-    sk.addColorStop(0,'#0d2545'); sk.addColorStop(1,'#1e3d20');
+    sk.addColorStop(0,'#1456A0'); sk.addColorStop(1,'#4A5859');
     ctx.fillStyle=sk; ctx.fillRect(0,0,w,h);
     // Sun glow
     const sx=scene.sunX, sy=scene.sunY;
     const pulse=1+Math.sin(t*0.9)*0.04;
     const glow=ctx.createRadialGradient(sx,sy,0,sx,sy,w*0.5*pulse);
-    glow.addColorStop(0,'rgba(255,200,80,0.22)');
-    glow.addColorStop(0.4,'rgba(255,160,40,0.10)');
+    glow.addColorStop(0,'rgba(219,83,117,0.22)');
+    glow.addColorStop(0.4,'rgba(255,200,80,0.10)');
     glow.addColorStop(1,'transparent');
     ctx.fillStyle=glow; ctx.fillRect(0,0,w,h);
     // Rotating rays
@@ -1283,7 +1283,7 @@ function _wcFrame(canvas,bg,scene){
     // Sun circle
     const sunG=ctx.createRadialGradient(sx,sy,0,sx,sy,12);
     sunG.addColorStop(0,'rgba(255,240,160,0.95)');
-    sunG.addColorStop(1,'rgba(255,190,60,0.80)');
+    sunG.addColorStop(1,'rgba(219,83,117,0.80)');
     ctx.fillStyle=sunG;
     ctx.beginPath(); ctx.arc(sx,sy,12,0,Math.PI*2); ctx.fill();
     // Drifting clouds
@@ -1293,16 +1293,16 @@ function _wcFrame(canvas,bg,scene){
     });
 
   } else if(tod==='afternoon'){
-    // Deeper blue-green sky
+    // Deep blue sky
     const sk=ctx.createLinearGradient(0,0,w,h);
-    sk.addColorStop(0,'#071a2e'); sk.addColorStop(1,'#0d2416');
+    sk.addColorStop(0,'#0F4480'); sk.addColorStop(1,'#1456A0');
     ctx.fillStyle=sk; ctx.fillRect(0,0,w,h);
     const sx=scene.sunX-w*0.1, sy=h*0.18;
     // Strong glow
     const pulse=1+Math.sin(t*0.6)*0.03;
     const glow=ctx.createRadialGradient(sx,sy,0,sx,sy,w*0.55*pulse);
     glow.addColorStop(0,'rgba(245,200,60,0.25)');
-    glow.addColorStop(0.35,'rgba(245,160,30,0.10)');
+    glow.addColorStop(0.35,'rgba(219,83,117,0.10)');
     glow.addColorStop(1,'transparent');
     ctx.fillStyle=glow; ctx.fillRect(0,0,w,h);
     // Heat shimmer rays — longer, slower
@@ -1330,21 +1330,21 @@ function _wcFrame(canvas,bg,scene){
     _drawCloud(ctx,c.x,c.y*0.6,c.scale*1.2,c.opacity*0.8);
 
   } else if(tod==='evening'){
-    // Deep dusk
+    // Deep dusk — burgundy to slate
     const sk=ctx.createLinearGradient(0,0,0,h);
-    sk.addColorStop(0,'#1a0828'); sk.addColorStop(0.6,'#2d0f0a'); sk.addColorStop(1,'#1a0808');
+    sk.addColorStop(0,'#5C0014'); sk.addColorStop(0.6,'#4A5859'); sk.addColorStop(1,'#2E3536');
     ctx.fillStyle=sk; ctx.fillRect(0,0,w,h);
     // Horizon glow
     const sx=scene.sunX-w*0.05, sy=h*0.88;
     const hglow=ctx.createRadialGradient(sx,sy,0,sx,sy,w*0.7);
-    hglow.addColorStop(0,'rgba(255,100,30,0.28)');
-    hglow.addColorStop(0.5,'rgba(200,50,10,0.10)');
+    hglow.addColorStop(0,'rgba(219,83,117,0.28)');
+    hglow.addColorStop(0.5,'rgba(92,0,20,0.10)');
     hglow.addColorStop(1,'transparent');
     ctx.fillStyle=hglow; ctx.fillRect(0,0,w,h);
     // Top ambient
     const aglow=ctx.createRadialGradient(w*0.72,h*0.1,0,w*0.72,h*0.1,w*0.4);
     const aPulse=0.08+Math.sin(t*0.4)*0.02;
-    aglow.addColorStop(0,`rgba(180,60,180,${aPulse})`);
+    aglow.addColorStop(0,`rgba(20,86,160,${aPulse})`);
     aglow.addColorStop(1,'transparent');
     ctx.fillStyle=aglow; ctx.fillRect(0,0,w,h);
     // Few stars appearing
@@ -1358,7 +1358,7 @@ function _wcFrame(canvas,bg,scene){
       c.x=(c.x+c.speed*0.5)%(w+80)-40;
       ctx.save();
       ctx.globalAlpha=0.07;
-      ctx.fillStyle='rgba(255,120,60,1)';
+      ctx.fillStyle='rgba(219,83,117,1)';
       const blob=(x,y,r)=>{ctx.beginPath();ctx.arc(c.x+x,c.y+y,r,0,Math.PI*2);ctx.fill();};
       const s=c.scale;
       blob(0,0,11*s); blob(-13,-4,8*s); blob(13,-4,9*s); blob(-22,4,6*s); blob(22,4,6*s);
@@ -1367,7 +1367,7 @@ function _wcFrame(canvas,bg,scene){
 
   } else { // night
     const sk=ctx.createLinearGradient(0,0,w,h);
-    sk.addColorStop(0,'#03050d'); sk.addColorStop(1,'#060810');
+    sk.addColorStop(0,'#2E3536'); sk.addColorStop(1,'#1a1e1f');
     ctx.fillStyle=sk; ctx.fillRect(0,0,w,h);
     // Stars twinkling
     scene.stars.forEach(s=>{
@@ -1389,11 +1389,11 @@ function _wcFrame(canvas,bg,scene){
     const mx=scene.moonX+Math.sin(t*0.05)*6;
     const my=scene.moonY+Math.cos(t*0.04)*3;
     const moonGlow=ctx.createRadialGradient(mx,my,0,mx,my,28);
-    moonGlow.addColorStop(0,'rgba(180,200,255,0.10)');
+    moonGlow.addColorStop(0,'rgba(213,210,216,0.12)');
     moonGlow.addColorStop(1,'transparent');
     ctx.fillStyle=moonGlow; ctx.fillRect(0,0,w,h);
     // Moon body
-    ctx.fillStyle='rgba(210,225,255,0.90)';
+    ctx.fillStyle='rgba(213,210,216,0.90)';
     ctx.beginPath(); ctx.arc(mx,my,10,0,Math.PI*2); ctx.fill();
     // Bite out for crescent
     ctx.globalCompositeOperation='destination-out';
@@ -1402,7 +1402,7 @@ function _wcFrame(canvas,bg,scene){
     ctx.globalCompositeOperation='source-over';
     // Subtle blue ambient
     const bglow=ctx.createRadialGradient(w*0.8,h*0.3,0,w*0.8,h*0.3,w*0.45);
-    bglow.addColorStop(0,'rgba(40,70,160,0.06)');
+    bglow.addColorStop(0,'rgba(20,86,160,0.06)');
     bglow.addColorStop(1,'transparent');
     ctx.fillStyle=bglow; ctx.fillRect(0,0,w,h);
   }
@@ -1426,10 +1426,10 @@ function setBgForTime(h,weatherCode){
   canvas.style.height=ph+'px';
   const tod=getTimeOfDay(h);
   const bgs={
-    morning:  'linear-gradient(135deg,#1a4070,#2a5540)',
-    afternoon:'linear-gradient(135deg,#1a3860,#1a4530)',
-    evening:  'linear-gradient(135deg,#2e1450,#401818)',
-    night:    'linear-gradient(135deg,#0a1020,#101828)',
+    morning:  'linear-gradient(135deg,#1456A0,#4A5859)',
+    afternoon:'linear-gradient(135deg,#1456A0,#4A5859)',
+    evening:  'linear-gradient(135deg,#5C0014,#4A5859)',
+    night:    'linear-gradient(135deg,#2E3536,#1a1e1f)',
   };
   bg.style.background=bgs[tod];
   _wcScene=_wcInitScene(tod,pw,ph);
@@ -1529,7 +1529,7 @@ function buildCalendar(){
     const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const hm=load(`${KEY}_meals_${ds}`,[]).length>0;
     const hw=woSessions.some(s=>s.date&&s.date.slice(0,10)===ds);
-    const dots=(hm?`<div style="width:5px;height:5px;border-radius:50%;background:#4ade80;flex-shrink:0"></div>`:'')+
+    const dots=(hm?`<div style="width:5px;height:5px;border-radius:50%;background:#1456A0;flex-shrink:0"></div>`:'')+
                (hw?`<div style="width:5px;height:5px;border-radius:50%;background:var(--blue2);flex-shrink:0"></div>`:'');
     html+=`<div class="cc${ds===ts?' today':''}${ds===calSelKey?' sel':''}${(hm||hw)?' has-data':''}" onclick="selectDay('${ds}')"><div class="cc-num">${d}</div>${dots?`<div style="display:flex;gap:2px;justify-content:center;margin-top:2px">${dots}</div>`:''}</div>`;
   }
@@ -1800,7 +1800,7 @@ async function snapAndReadBarcode(){
 
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:100,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:100,
         system:'You are a barcode reader. Look at the image and find the barcode number (EAN-13, EAN-8, UPC-A etc). Return ONLY the digits, nothing else. If you cannot find a barcode, return the word NONE.',
         messages:[{role:'user',content:[
           {type:'image',source:{type:'base64',media_type:'image/jpeg',data:b64}},
@@ -1921,7 +1921,7 @@ async function identifyProductFromImage(b64){
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
+        model:'claude-sonnet-4-6',
         max_tokens:80,
         messages:[{role:'user',content:[
           {type:'image',source:{type:'base64',media_type:'image/jpeg',data:b64}},
@@ -2034,7 +2034,7 @@ async function runImpactScan(){
 
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:400,
         system:'Nutrition expert. Return ONLY valid JSON, no markdown: {"name":"food name","emoji":"single emoji","calories":number,"protein":number,"carbs":number,"fat":number,"verdict":"one punchy sentence about whether this fits remaining targets"}',
         messages:[{role:'user',content}]})});
     const data=await res.json();
@@ -2260,7 +2260,7 @@ function renderProgressPage(){
   const nowD=new Date(),dToSun=(7-nowD.getDay())%7;
   const sunD=new Date(nowD);sunD.setDate(nowD.getDate()+dToSun);
   const sunLbl=dToSun===0?'today':'Sun '+sunD.toLocaleDateString('en-US',{month:'short',day:'numeric'});
-  const defCol=effDef>=0?'#4ade80':'var(--amber)';
+  const defCol=effDef>=0?'#1456A0':'var(--amber)';
   const defWord=effDef>=0?'deficit':'surplus';
   html+=`
   <div class="wk-proj-card">
@@ -2342,8 +2342,8 @@ function renderProgressPage(){
   if(statsEl)statsEl.innerHTML=statsHtml;
 
   // Render charts after DOM is set
-  renderChart('chart-w',wEs.slice(-8),'weight','kg','#388bfd',84,92);
-  renderChart('chart-bf',bEs.slice(-8),'bf','%','#2dd4c8',18,28);
+  renderChart('chart-w',wEs.slice(-8),'weight','kg','#1456A0',84,92);
+  renderChart('chart-bf',bEs.slice(-8),'bf','%','#DB5375',18,28);
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -2368,7 +2368,7 @@ Time of day: ${new Date().getHours()}:00. Goal: fat loss cut phase.`;
 
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:600,
         system:'Return ONLY valid JSON, no markdown: {"suggestions":[{"name":"food name","emoji":"emoji","reason":"one line why this fits","calories":number,"protein":number,"carbs":number,"fat":number}]} — 3 suggestions, practical foods available in '+getProfile().city+', prioritize whatever macro is most behind.',
         messages:[{role:'user',content:ctx}]})});
     const data=await res.json();
@@ -3001,7 +3001,7 @@ Rules:
 
   try{
     const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})});
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:2000,messages:[{role:'user',content:prompt}]})});
     if(!res.ok){const errBody=await res.text().catch(()=>'');throw new Error(`HTTP ${res.status}: ${errBody.slice(0,120)}`);}
     const data=await res.json();
     if(data.error){throw new Error(data.error.message||JSON.stringify(data.error));}
@@ -3620,7 +3620,7 @@ async function generateWeeklySummary(weekK){
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
+        model:'claude-sonnet-4-6',
         max_tokens:120,
         system:"You are a concise performance coach. Analyse this week's data and give 2-3 bullet observations about patterns — e.g. consistently under on protein, stronger workout days after better sleep, calories spiking on weekends. Be specific, use the actual numbers, max 60 words total.",
         messages:[{role:'user',content:userMsg}]
@@ -3822,7 +3822,7 @@ async function loadFastingRecommendation(forceRefresh=false){
   const ctx=`${getDayContext()}\n${getFastContext()}\nFasting preference: ${fastProtocol}\nAvg recent fast: ${avgDur}h over ${recentFasts.length} fasts\n${_buildCoachContext().workoutCtx}`;
   try{
     const resp=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:450,
+      model:'claude-sonnet-4-6',max_tokens:450,
       system:(()=>{const _fp=getProfile();return 'You are a concise intermittent fasting and nutrition coach for '+_fp.name+' ('+_fp.age+(_fp.gender==='male'?'M':'F')+', '+_fp.weight+'kg, '+_fp.bf+'% BF, goal '+_fp.goalBF+'% BF'+(_fp.goalDeadline?' by '+_fp.goalDeadline:'')+'). Give specific, actionable fasting advice. Be brief and direct. No markdown headers, just 3-4 short paragraphs.';})(),
       messages:[{role:'user',content:`Based on my data, recommend:\n1. Best fasting protocol (16:8, 18:6, or 20:4) for my fat loss goal and why\n2. Optimal eating window start/end times\n3. Which days this week to fast considering my workout schedule\n4. One key tip for right now\n\n${ctx}`}]
     })});

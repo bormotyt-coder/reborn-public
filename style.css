@@ -1,42 +1,42 @@
 /* ═══════════════════════════════════════════════════════════
-   reBorn v9 — Calm Redesign
-   Theme: Warm ivory · Soft shadows · iOS-native feel
-   Inspired by Calm app — serene, rounded, breathable
+   reBorn v9 — Reborn Redesign
+   Theme: Slate · Rose · Burgundy · Lavender · Blue
+   Palette: #4A5859 · #DB5375 · #5C0014 · #D5D2D8 · #1456A0
 ═══════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&display=swap');
 
 :root {
-  --bg: #F5F2EC;
-  --bg2: #EDE9E1;
-  --bg3: #E5E0D7;
-  --card: #fff;
-  --glass:  rgba(255,255,255,0.78);
-  --glass2: rgba(255,255,255,0.92);
-  --glass3: rgba(255,255,255,0.55);
-  --glass-blue: rgba(74,124,126,0.05);
-  --border:  rgba(0,0,0,0.07);
-  --border2: rgba(0,0,0,0.04);
-  --border-blue: rgba(74,124,126,0.16);
-  --text:  #1C1F26;
-  --text2: rgba(28,31,38,0.62);
-  --muted: rgba(28,31,38,0.36);
-  --ghost: rgba(28,31,38,0.16);
-  --blue:    #4A7C7E;
-  --blue2:   #3D6C6E;
-  --blue-dim: rgba(74,124,126,0.10);
-  --blue-glow: rgba(74,124,126,0.12);
-  --pc: #C47940;
-  --cc: #5B9A8B;
-  --fc: #8B6DB0;
-  --wc: #4A7C7E;
-  --green:  #5B9A6B;
-  --amber:  #C89444;
-  --red:    #C45B52;
-  --lime:   #8BAA5A;
-  --whoop-green: #2A9D8F;
-  --whoop-dim:   rgba(42,157,143,0.07);
-  --whoop-border: rgba(42,157,143,0.16);
+  --bg: #E8E6EA;
+  --bg2: #D5D2D8;
+  --bg3: #C9C6CE;
+  --card: #F4F3F5;
+  --glass:  rgba(213,210,216,0.78);
+  --glass2: rgba(244,243,245,0.92);
+  --glass3: rgba(213,210,216,0.55);
+  --glass-blue: rgba(20,86,160,0.05);
+  --border:  rgba(74,88,89,0.12);
+  --border2: rgba(74,88,89,0.06);
+  --border-blue: rgba(20,86,160,0.16);
+  --text:  #2E3536;
+  --text2: rgba(74,88,89,0.72);
+  --muted: rgba(74,88,89,0.48);
+  --ghost: rgba(74,88,89,0.16);
+  --blue:    #1456A0;
+  --blue2:   #0F4480;
+  --blue-dim: rgba(20,86,160,0.10);
+  --blue-glow: rgba(20,86,160,0.12);
+  --pc: #DB5375;
+  --cc: #1456A0;
+  --fc: #4A5859;
+  --wc: #1456A0;
+  --green:  #4A5859;
+  --amber:  #DB5375;
+  --red:    #5C0014;
+  --lime:   #1456A0;
+  --whoop-green: #1456A0;
+  --whoop-dim:   rgba(20,86,160,0.07);
+  --whoop-border: rgba(20,86,160,0.16);
   --font:      'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Fraunces', Georgia, serif;
